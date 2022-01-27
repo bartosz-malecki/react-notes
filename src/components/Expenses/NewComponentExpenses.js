@@ -1,8 +1,8 @@
 import "./NewComponentExpenses.css";
 import ExpenseItem from "./ExpenseItem";
-import Card from "./Card";
+import Card from "../UI/Card";
 
-function NewComponentExpenses(props) {
+const NewComponentExpenses = (props) => {
   return (
     <Card className="expenses">
       <ExpenseItem
@@ -27,6 +27,8 @@ function NewComponentExpenses(props) {
       />
     </Card>
   );
-}
+};
 
 export default NewComponentExpenses;
+
+// Każdy ExpenseItem ma swój stan, dlatego gdy klikamy w przycisk, zmienia nazwy niezależnie od siebie.
