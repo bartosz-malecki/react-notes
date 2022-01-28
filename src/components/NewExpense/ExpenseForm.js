@@ -18,7 +18,12 @@ const ExpenseForm = () => {
     // setUserInput({
     //   ...userInput, // 2. ..dlatego trzeba skopiować pozostałe klucze i potem nadpisuje konkretne wartości.
     //   enteredTitle: event.target.value, // 1. z samym tym trace klucze pozostałych par klucz-wartość. react zastąpi stary stan - nowym, a nie połączy go.. trzeba ręcznie skopiować inne wartości..
+    // }); // 3. jednak przy tym podejściu nie mamy pewności, że bazujemy na aktualnym stanie. Aby mieć pewnośc trzeba zastosować:
+
+    // setUserInput((prevState) => {
+    //   return { ...prevState, enteredTitle: event.target.value };
     // });
+    // dzięki tej funkcji mamy pewność, że stan będzię zawsze aktualny z zachowaniem wszelkich harmonogramów i aktulizacji. Powinno się używać tej składni, gdy aktualizajca stanu zależy od poprzedniego stanu
   };
 
   const amountHandler = (event) => {
@@ -37,8 +42,19 @@ const ExpenseForm = () => {
     // });
   };
 
+  // zapisywanie danych z formularza
+  const submitHandler = (event) => {
+    event.preventDefault();
+
+    const expenseDate = {
+      title: enteredTitle,
+      amount: enteredAmount,
+      date: new Date(enteredDate),
+    };
+  };
+
   return (
-    <form>
+    <form onSubmit={submitHandler}>
       <div className="new-expense__controls">
         <div className="new-expense__control">
           <label>Title</label>
