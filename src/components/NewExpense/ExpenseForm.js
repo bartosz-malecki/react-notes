@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./ExpenseForm.css";
 
-const ExpenseForm = () => {
+const ExpenseForm = (props) => {
   const [enteredTitle, setEnteredTitle] = useState("");
   const [enteredAmount, setEnteredAmount] = useState("");
   const [enteredDate, setEnteredDate] = useState("");
@@ -46,11 +46,16 @@ const ExpenseForm = () => {
   const submitHandler = (event) => {
     event.preventDefault();
 
-    const expenseDate = {
+    const expenseData = {
       title: enteredTitle,
       amount: enteredAmount,
       date: new Date(enteredDate),
     };
+
+    props.onSaveExpenseData(expenseData); // wartośc ta idzie do NewExpense jako parametr enteredExpeneseData
+    setEnteredTitle("");
+    setEnteredAmount("");
+    setEnteredDate("");
   };
 
   return (
@@ -58,7 +63,11 @@ const ExpenseForm = () => {
       <div className="new-expense__controls">
         <div className="new-expense__control">
           <label>Title</label>
-          <input type="text" onChange={titleChangeHandler} />
+          <input
+            type="text"
+            value={enteredTitle} // two-way binding
+            onChange={titleChangeHandler}
+          />
         </div>
         <div className="new-expense__control">
           <label>Amount</label>
@@ -66,6 +75,7 @@ const ExpenseForm = () => {
             type="number"
             min="0.01"
             step="0.01"
+            value={enteredAmount}
             onChange={amountHandler}
           />
         </div>
@@ -75,6 +85,7 @@ const ExpenseForm = () => {
             type="date"
             min="2019-01-01"
             max="2022-12-31"
+            value={enteredDate}
             onChange={dateHandler}
           />
         </div>
@@ -87,3 +98,9 @@ const ExpenseForm = () => {
 };
 
 export default ExpenseForm;
+
+// Wiązanie dwukierunkowe (two-way binding) - w przypadku danych wejściowych nie tylko nasłuchujemy, ale również przekazujemy nową wartośc z powrotem do wejścia, abyśmy mogli zresetować lub zmienić dane programowo.
+// Wystarczy dodać atrybut value od elementu wyjściowego (inputu). Powoduje to ustawienie właściwości wartości wewnętrznej, którą ma każdy element wyjściowy i możemy ustawić ją na nową wartość.
+// Tak więc input teraz nie tylko nasłuchuje (onChange) aby zaktualizować nasz stan, ale też przekazujemy stan z powrotem na wejście.
+// Zaletą tego jest, że gdy przesyłamy formularz, możemy wywołać np. setEnteredTitle i ustawić go na pusty string. Robiąc to nadpisujemy to co użytkownik wprowadził po przesłaniu formularza, a tym samym usuwamy dane wejsciowe i można to zrobić dla wszystkich danych wejściowych.
+// Po ludzku - przesyła nam formularz z danymi wejściowymi i czyści formularz.
