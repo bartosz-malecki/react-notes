@@ -26,6 +26,6 @@ const ExpenseItem = (props) => {
 export default ExpenseItem;
 
 // działanie useState:
-// restrujemy stan useState(props.title). [title, setTitle] oznaczamy wartość i funkcje aktualizującą.
+// rejstrujemy stan useState(props.title). [title, setTitle] oznaczamy wartość i funkcje aktualizującą.
 // wywołujemy funkjce aktulaizującą (clickHandler).
 // react zrobi resztę - wykona ponownie funkcję (komponent) i nadpisze JSX.
