@@ -1,11 +1,12 @@
-import "./NewExpense.css";
-import "./ExpenseForm";
+import React from "react";
+
 import ExpenseForm from "./ExpenseForm";
+import "./NewExpense.css";
 
 const NewExpense = (props) => {
-  const saveExpenseDateHandler = (enteredExpeneseData) => {
+  const saveExpenseDataHandler = (enteredExpenseData) => {
     const expenseData = {
-      ...enteredExpeneseData,
+      ...enteredExpenseData,
       id: Math.random().toString(),
     };
     props.onAddExpense(expenseData);
@@ -13,7 +14,7 @@ const NewExpense = (props) => {
 
   return (
     <div className="new-expense">
-      <ExpenseForm onSaveExpenseData={saveExpenseDateHandler} />
+      <ExpenseForm onSaveExpenseData={saveExpenseDataHandler} />
       {/*nazwa zaczyna się od 'on' by wyjaśnić, że to wskaźnik funkcji który jest przekazywany jako argument */}
     </div>
   );

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+
 import "./ExpenseForm.css";
 
 const ExpenseForm = (props) => {
@@ -26,15 +27,15 @@ const ExpenseForm = (props) => {
     // dzięki tej funkcji mamy pewność, że stan będzię zawsze aktualny z zachowaniem wszelkich harmonogramów i aktulizacji. Powinno się używać tej składni, gdy aktualizajca stanu zależy od poprzedniego stanu
   };
 
-  const amountHandler = (event) => {
+  const amountChangeHandler = (event) => {
     setEnteredAmount(event.target.value);
     // setUserInput({
     //   ...userInput,
-    //   enteredDate: event.target.value,
+    //   enteredAmount: event.target.value,
     // });
   };
 
-  const dateHandler = (event) => {
+  const dateChangeHandler = (event) => {
     setEnteredDate(event.target.value);
     // setUserInput({
     //   ...userInput,
@@ -76,7 +77,7 @@ const ExpenseForm = (props) => {
             min="0.01"
             step="0.01"
             value={enteredAmount}
-            onChange={amountHandler}
+            onChange={amountChangeHandler}
           />
         </div>
         <div className="new-expense__control">
@@ -86,7 +87,7 @@ const ExpenseForm = (props) => {
             min="2019-01-01"
             max="2022-12-31"
             value={enteredDate}
-            onChange={dateHandler}
+            onChange={dateChangeHandler}
           />
         </div>
       </div>
